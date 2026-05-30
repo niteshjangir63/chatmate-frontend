@@ -120,6 +120,15 @@
   box-shadow: 0 10px 25px rgba(91, 77, 255, 0.4);
 }
 
+
+.login-inputs button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
 .reset-password {
   margin-top: 18px;
   text-align: center;
@@ -158,4 +167,30 @@
   .login-inputs button {
     height: 42px;
   }
+}
+
+
+
+
+.password-checks {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.password-checks span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valid {
+  color: #22c55e;
+}
+
+.invalid {
+  color: #ef4444;
 }

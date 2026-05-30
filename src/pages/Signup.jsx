@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import "./Login.css";
 import { useState } from "react";
+import { useAuth } from "../context/AuthProvider";
+import { signup } from "../api/auth";
+import Loader from "../loader/Loader";
 
+import PasswordQuality from "../utils/PasswordQuality";
 export default function Signup() {
-
+    const [isStrong, setIsStrong] = useState(false);
+    const { authUser, setAuthUser } = useAuth();
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -15,10 +21,43 @@ export default function Signup() {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
+        try {
+            setLoading(true);
+
+            const res = await signup(formData);
+
+            if (res?.data?.user) {
+
+                setAuthUser(res?.data?.user);
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+        finally {
+            setLoading(false)
+        }
+
+
     }
+
+    const isDisabled =
+        !formData.email?.trim() ||
+        !formData.password?.trim();
+
+
+    const password = formData.password;
+
+    const isInclude =
+        password.length >= 8 &&
+        /[A-Z]/.test(password) &&
+        /[a-z]/.test(password) &&
+        /\d/.test(password) &&
+        /[#@$!%*?&]/.test(password);
+
     return (
         <div className="container">
             <div className="inner-container">
@@ -30,8 +69,12 @@ export default function Signup() {
                         <input name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Name" required />
                         <input name="email" value={formData.email} type="email" onChange={handleChange} placeholder="Email" required />
                         <input name="password" value={formData.password} type="password" onChange={handleChange} placeholder="Password" required />
-                        <button type="submit">Signup to Chatmate</button>
+
+                        
+                        <button type="submit" disabled={isDisabled}>{loading ? <Loader /> : "Signup to Chatmate"}</button>
                     </form>
+
+                    <PasswordQuality password={formData.password}/>
 
                     <div className="reset-password">
                         <span>
@@ -39,6 +82,8 @@ export default function Signup() {
                         </span>
 
                     </div>
+
+
                 </div>
             </div>
         </div>
