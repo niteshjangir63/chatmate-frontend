@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    #2c2e8f 0%,
+    #5b4dff 35%,
+    #7e9bff 70%,
+    #f5c3e7 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.container::before {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.35);
+  top: -100px;
+  left: -100px;
+}
+
+.container::after {
+  width: 400px;
+  height: 400px;
+  background: rgba(245, 195, 231, 0.5);
+  bottom: -150px;
+  right: -150px;
+}
+
+.inner-container {
+  width: min(90%, 420px);
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.inner-container h1 ,h3 {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.inner-container p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+
+.inner-container-inputs {
+  width: 100%;
+}
+
+.login-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.login-inputs input {
+  width: 100%;
+  height: 45px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid #b9a9ff;
+  outline: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #1f1f35;
+  font-size: 15px;
+}
+
+.login-inputs input:focus {
+  border-color: #5b4dff;
+  box-shadow: 0 0 0 3px rgba(91, 77, 255, 0.25);
+}
+
+.login-inputs button {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #5b4dff, #7e9bff);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-inputs button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(91, 77, 255, 0.4);
+}
+
+.reset-password {
+  margin-top: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.reset-password .link {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.reset-password a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .inner-container {
+    width: 95%;
+    padding: 28px;
+  }
+
+  .inner-container h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner-container {
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  .login-inputs input,
+  .login-inputs button {
+    height: 42px;
+  }
+}
