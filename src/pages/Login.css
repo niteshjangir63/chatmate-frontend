@@ -121,7 +121,7 @@
 }
 
 
-.login-inputs button:disabled {
+.login-inputs button:disabled ,.submitBtn:disabled{
   background: #9ca3af;
   cursor: not-allowed;
   opacity: 0.7;

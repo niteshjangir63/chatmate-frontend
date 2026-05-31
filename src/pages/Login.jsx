@@ -4,8 +4,12 @@ import { useState } from "react";
 import Loader from "../loader/Loader";
 import { login } from "../api/auth";
 import { useAuth } from "../context/AuthProvider"
+import {useNavigate} from "react-router-dom"
+import { useToast } from "../context/ToastContext";
 
 export default function Login() {
+    const {showToast} = useToast();
+    const navigate =  useNavigate();
     const [loading, setLoading] = useState(false);
     const { authUser, setAuthUser } = useAuth();
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -26,10 +30,13 @@ export default function Login() {
             const res = await login(formData);
             if (res?.data?.user) {
                 setAuthUser(res?.data?.user);
+                showToast(res.data.message,"success");
+                navigate("/")
             }
-
+            
         } catch (e) {
-
+            
+            showToast(e.response.data.message,"error");
             console.log(e);
         }
         finally {
@@ -37,6 +44,8 @@ export default function Login() {
         }
 
     }
+
+    console.log("authUser -->",authUser)
 
 
     const isDisabled =

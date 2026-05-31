@@ -8,8 +8,13 @@ export const signup = async (formData) => {
 
     return API.post("/signup", formData);
 }
-export const itsMe = async (formData) => {
+export const verify = async () => {
 
-    return API.post("/auth/me");
+    return API.get("/auth/verify");
 }
+export const logout = async () => {
+
+    return API.post("/logout");
+}
+
 
